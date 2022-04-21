@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { counterReducer } from './counter';
+import { baseApi } from '../api';
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
 });
 
