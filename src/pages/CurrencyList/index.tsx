@@ -2,8 +2,8 @@ import { Dropdown, IDropdownOption } from '@fluentui/react';
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useGetUserInfoQuery } from '../../api';
 import { useGetAllCurrencyQuery, useGetCurrencyListByCodeQuery } from '../../api/currency';
-import { useGetUserInfoQuery } from '../../api/user';
 import { ROUTES } from '../../App/routes';
 import { CardUI } from '../../components/CardUI';
 import { Header } from '../../components/Header';

@@ -75,4 +75,9 @@ export const HEADERS = {
       <Blue>Singup</Blue>
     </Header>
   ),
+  adminUsers: (
+    <Header>
+      <Blue>Admin</Blue> Users
+    </Header>
+  ),
 };

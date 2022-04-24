@@ -8,4 +8,5 @@ export const ROUTES = {
   profile: '/user',
   currency: '/currency/:pair',
   codeOverview: '/overview/:code',
+  adminUsers: '/admin/users',
 };

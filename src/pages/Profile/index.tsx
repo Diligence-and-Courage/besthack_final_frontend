@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetUserInfoQuery } from '../../api/user';
+import { useGetUserInfoQuery } from '../../api';
 import { ROUTES } from '../../App/routes';
 import { Header } from '../../components/Header';
 import { Layout } from '../../components/Layout';
@@ -15,6 +15,10 @@ const buttons = [
   {
     text: HEADER_BUTTONS.newsList,
     link: ROUTES.news,
+  },
+  {
+    text: HEADER_BUTTONS.currencyList,
+    link: ROUTES.overview,
   },
 ];
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 
-import { useGetUserCurrencyQuery } from '../../../../api/user';
+import { useGetUserCurrencyQuery } from '../../../../api';
 import { CardUI } from '../../../../components/CardUI';
 import { CurrencyCard } from '../../../../containers/CurrencyCard';
 import { CurrencyPair } from '../../../../models';

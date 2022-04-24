@@ -4,7 +4,7 @@ import { Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetUserExistsQuery, useRegisterMutation } from '../../../../api/user';
+import { useGetUserExistsQuery, useRegisterMutation } from '../../../../api';
 import { ROUTES } from '../../../../App/routes';
 import { SignupFormRow } from '../../../../containers/FormFields';
 import { BtnRightRow } from '../../../../containers/FormFields/styled';

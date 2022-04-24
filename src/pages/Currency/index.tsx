@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useGetUserInfoQuery } from '../../api';
 import { useGetCurrencyListByCodeQuery } from '../../api/currency';
-import { useGetUserInfoQuery } from '../../api/user';
 import { ROUTES } from '../../App/routes';
 import { Header } from '../../components/Header';
 import { Layout } from '../../components/Layout';

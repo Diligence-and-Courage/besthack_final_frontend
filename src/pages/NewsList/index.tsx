@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
+import { useGetUserInfoQuery } from '../../api';
 import { useNewsQuery } from '../../api/news';
-import { useGetUserInfoQuery } from '../../api/user';
 import { ROUTES } from '../../App/routes';
 import { CardUI } from '../../components/CardUI';
 import { Header } from '../../components/Header';
@@ -22,7 +22,7 @@ export const NewsListPage = () => {
   }, [data, isSuccess]);
 
   const user = useGetUserInfoQuery();
-  const buttons = useMemo(() => {
+  const buttons = () => {
     if (user.isError) {
       return [
         {
@@ -48,11 +48,11 @@ export const NewsListPage = () => {
       ];
     }
     return [];
-  }, [user]);
+  };
 
   return (
     <Layout
-      header={<Header pageName={HEADERS.newsList} buttons={buttons} />}
+      header={<Header pageName={HEADERS.newsList} buttons={buttons()} />}
       left={
         isSuccess && (
           <CardsWrapper>

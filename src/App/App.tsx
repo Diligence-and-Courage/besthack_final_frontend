@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
+import { AdminUsersPage } from '../pages/AdminUsers';
 import { CurrencyPage } from '../pages/Currency';
 import { CurrencyListPage } from '../pages/CurrencyList';
 import { LoginPage } from '../pages/Login';
@@ -24,6 +25,8 @@ const App = () => {
         <Route path={ROUTES.overview} element={<Navigate to={`${ROUTES.overview}/RUB`} />} />
         <Route path={ROUTES.news} element={<NewsListPage />} />
         <Route path={ROUTES.profile} element={<ProfilePage />} />
+        <Route path={ROUTES.adminUsers} element={<AdminUsersPage />} />
+        <Route path="/admin/*" element={<Navigate to={ROUTES.adminUsers} />} />
         <Route path="*" element={<Navigate to={ROUTES.news} />} />
       </Routes>
     </Router>

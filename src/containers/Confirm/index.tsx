@@ -1,8 +1,8 @@
 import { Callout, DefaultButton, Text, TextField } from '@fluentui/react';
 import React, { useState } from 'react';
 
+import { useGetUserInfoQuery } from '../../api';
 import { useAddCurrencyMutation, useDeleteCurrencyMutation } from '../../api/currency';
-import { useGetUserInfoQuery } from '../../api/user';
 import { Padding } from './styled';
 
 interface ConfirmProps {

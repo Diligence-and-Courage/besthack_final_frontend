@@ -1,10 +1,9 @@
 import { DefaultButton } from '@fluentui/react';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { OnChange } from 'react-final-form-listeners';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetUserExistsQuery, useLoginMutation } from '../../../../api/user';
+import { useGetUserInfoQuery, useLoginMutation } from '../../../../api';
 import { ROUTES } from '../../../../App/routes';
 import { SignupFormRow } from '../../../../containers/FormFields';
 import { BtnRightRow } from '../../../../containers/FormFields/styled';
@@ -31,27 +30,22 @@ const onSubmit =
 const passwordField = SignupFormRow('password', 'Password', 'password');
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState<string>('');
-
   const [login, { isSuccess }] = useLoginMutation();
-  const { data } = useGetUserExistsQuery({ login: email });
+  const { refetch } = useGetUserInfoQuery();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(ROUTES.profile);
-    }
-  }, [isSuccess]);
-
-  if (email && data?.data?.exists === false) {
-    navigate(`${ROUTES.signup}?email=${email}`);
-  }
 
   const query = useQuery();
   const emailField = useMemo(
     () => SignupFormRow('email', 'E-mail', undefined, query.get('email')),
     [],
   );
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetch();
+      navigate(ROUTES.news);
+    }
+  }, [isSuccess]);
 
   return (
     <Form
@@ -60,7 +54,6 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           {emailField}
           {passwordField}
-          <OnChange name="email">{(value) => setEmail(value)}</OnChange>
           <BtnRightRow>
             <DefaultButton type="submit">Go</DefaultButton>
           </BtnRightRow>

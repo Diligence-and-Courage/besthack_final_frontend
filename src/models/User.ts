@@ -5,10 +5,13 @@ export interface User {
   email: string;
   password: string;
   balance: number;
+  attempts: number;
+  isBlocked: number;
+  role: Role;
 }
 
 export type UserInfo = Omit<User, 'password'>;
-export type CreateUserInfo = Omit<User, 'id' | 'balance'>;
+export type CreateUserInfo = Pick<User, 'password' | 'email'>;
 export type AuthUserInfo = Pick<User, 'password' | 'email'>;
 
 export type Role = 'common' | 'user' | 'admin';
