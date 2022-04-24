@@ -8,7 +8,7 @@ import { HEADERS } from '../../constants/texts';
 const MainPage = () => {
   const { isError } = useHelloQuery();
 
-  return <Layout header={<Header pageName={HEADERS.main} />} left={isError && <div>Error</div>} />;
+  return <Layout header={<Header pageName={HEADERS.news} />} left={isError && <div>Error</div>} />;
 };
 
 export default memo(MainPage);

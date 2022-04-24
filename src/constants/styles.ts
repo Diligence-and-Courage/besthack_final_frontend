@@ -7,7 +7,10 @@ export const COLORS = {
   RED: SharedColors.redOrange10,
   GREEN: SharedColors.greenCyan10,
   DEFAULT: palette.themePrimary,
+  GREY_TEXT: palette.neutralSecondary,
 };
+
+export const GRADIENT = `linear-gradient(220deg, ${palette.themePrimary}, ${palette.themeDark})`;
 
 export const HEADER_GRADIENT = `
   background: -webkit-linear-gradient(300deg, ${palette.themePrimary}, ${palette.themeDark});

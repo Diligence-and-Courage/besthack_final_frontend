@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-export const StyledRow = styled.div<{ gap?: string }>`
+// export const StyledRow = styled.div<{ gap?: string }>`
+//   display: flex;
+//   flex-direction: row;
+//
+//   gap: ${({ gap }) => gap};
+// `;
+
+export const StyledRowSpaceBetween = styled.div<{ gap?: string }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,7 +20,16 @@ export const StyledElemRight = styled.div`
   flex-direction: column;
   align-items: end;
 `;
-export const StyledAlignBottomRow = styled.div<{ gap: string }>`
+
+export const StyledAlignCenterRow = styled.div<{ gap: string }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: ${({ gap }) => gap};
+`;
+
+export const StyledAlignBottomRowSpaceBetween = styled.div<{ gap: string }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
