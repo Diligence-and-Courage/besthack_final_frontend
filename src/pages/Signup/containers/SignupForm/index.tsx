@@ -40,7 +40,7 @@ export const SignupForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate(ROUTES.profile);
+      navigate(ROUTES.news);
     }
   }, [isSuccess]);
 

@@ -35,8 +35,8 @@ export const NameText = styled.p`
 export const HEADER_BUTTONS = {
   login: 'Login',
   profile: 'Profile',
-  newsList: 'News List',
-  currencyList: 'Currency List',
+  newsList: 'News',
+  currencyList: 'Currency Overview',
 };
 
 export const HEADERS = {
