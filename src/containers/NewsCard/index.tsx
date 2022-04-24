@@ -10,10 +10,7 @@ import { LabelText, NewsCardWrapper, PlainText } from './styled';
 export const NewsCard = ({
   title,
   publishedAt,
-  categories = [
-    { name: 'политика', id: 'politics' },
-    { name: 'экономика', id: 'economics' },
-  ],
+  categories = [],
   description,
   urlToImage,
   source,

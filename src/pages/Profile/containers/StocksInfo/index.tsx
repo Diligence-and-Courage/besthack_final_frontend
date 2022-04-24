@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useGetUserCurrencyQuery } from '../../../../api/user';
 import { CardUI } from '../../../../components/CardUI';
 import { CurrencyCard } from '../../../../containers/CurrencyCard';
-import { Currency } from '../../../../models';
+import { CurrencyPair } from '../../../../models';
 import { camelize } from '../../../../utils/transforms';
 import { ColWrapper } from '../../styled';
 import { ErrorMsg } from './styled';
@@ -16,7 +16,7 @@ export const UserStocks = () => {
 
   const list: CurrencyPair[] = useMemo(() => {
     if (isSuccess && data) {
-      return data.data.map((gotStock) => camelize(gotStock)) as unknown as Currency[];
+      return data.data.map((gotStock) => camelize(gotStock)) as CurrencyPair[];
     }
     return [];
   }, [data, isSuccess]);

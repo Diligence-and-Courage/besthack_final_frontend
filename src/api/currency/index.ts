@@ -1,5 +1,12 @@
-import { AppResponse, CurrencyCommon, CurrencyPair, PostCurrency, UserInfo } from '../../models';
-import { StockCandleQuery, StockCandleResponse } from '../../models/Chart';
+import {
+  AppResponse,
+  CurrencyCommon,
+  CurrencyPair,
+  PostCurrency,
+  TimeSeriesValues,
+  UserInfo,
+} from '../../models';
+import { ApiTimeSeriesProps } from '../../models/Chart';
 import { baseApi } from '../index';
 
 const currencyApi = baseApi.injectEndpoints({
@@ -24,23 +31,9 @@ const currencyApi = baseApi.injectEndpoints({
         body: postCurrency,
       }),
     }),
-    stockCandles: builder.query<AppResponse<StockCandleResponse>, StockCandleQuery>({
-      query: ({ symbols, resolution, timeFrom, timeTo }) => {
-        let params = `symbols=${symbols}`;
-
-        if (resolution) {
-          params += `&resolution=${resolution}`;
-        }
-
-        if (timeFrom) {
-          params += `&timeFrom=${timeFrom}`;
-        }
-
-        if (timeTo) {
-          params += `&timeTo=${timeTo}`;
-        }
-
-        return `/timeseries?${params}`;
+    currencyCandles: builder.query<AppResponse<TimeSeriesValues[]>, ApiTimeSeriesProps>({
+      query: ({ code, base, duration }) => {
+        return `/currency/timeseries?code=${code}&base=${base}&duration=${duration}`;
       },
     }),
   }),
@@ -51,5 +44,5 @@ export const {
   useGetCurrencyListByCodeQuery,
   useAddCurrencyMutation,
   useDeleteCurrencyMutation,
-  useStockCandlesQuery,
+  useCurrencyCandlesQuery,
 } = currencyApi;

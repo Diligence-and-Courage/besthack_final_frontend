@@ -19,7 +19,7 @@ interface SubmitData {
   password: string;
 }
 
-const onSubmit = (registerFunc) => (values: SubmitData) => {
+const onSubmit = (registerFunc: (args: any) => void) => (values: SubmitData) => {
   registerFunc(decamelize(values));
 };
 
@@ -39,8 +39,6 @@ export const LoginForm = () => {
     }
     return isRegistration;
   }, [loginResponse]);
-
-  console.log('isReg', isRegistration);
 
   useEffect(() => {
     if (loginResponse.isSuccess) {

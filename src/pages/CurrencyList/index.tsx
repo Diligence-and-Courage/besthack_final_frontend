@@ -27,7 +27,6 @@ export const CurrencyListPage = () => {
     }
     return [];
   }, [optionsResponse]);
-  console.log(options);
 
   const { data, isSuccess } = useGetCurrencyListByCodeQuery({ code });
   const currencies: CurrencyPair[] = useMemo(() => {
@@ -46,19 +45,19 @@ export const CurrencyListPage = () => {
   const buttons = useMemo(() => {
     const res = [
       {
-        text: HEADER_BUTTONS.goNewsList,
+        text: HEADER_BUTTONS.newsList,
         link: ROUTES.news,
       },
     ];
 
     if (user.isError) {
       res.push({
-        text: HEADER_BUTTONS.goLogin,
+        text: HEADER_BUTTONS.login,
         link: ROUTES.login,
       });
     } else if (user.isSuccess) {
       res.push({
-        text: HEADER_BUTTONS.goProfile,
+        text: HEADER_BUTTONS.profile,
         link: ROUTES.profile,
       });
     }

@@ -1,7 +1,7 @@
 import { ICommandBarItemProps } from '@fluentui/react';
 
 import { ChartType } from '../../../components/Chart';
-import { rangeConfig, RangeType } from '../Range';
+import { TimeSeries } from '../../../models';
 
 export const getName = (chartType: ChartType): string => {
   if (chartType === 'candle') {
@@ -47,14 +47,14 @@ export const getChartItems = (
 };
 
 export const getRangeItems = (
-  currentRange: RangeType,
-  onChange: (range: RangeType) => void,
+  currentRange: TimeSeries,
+  onChange: (range: TimeSeries) => void,
 ): ICommandBarItemProps[] => {
-  return Object.values(rangeConfig)
-    .filter((cfg) => cfg.type !== currentRange)
-    .map((cfg) => ({
-      key: cfg.text,
-      text: cfg.text,
-      onClick: () => onChange(cfg.type),
+  return ['10m', '30m', '1h', '4h']
+    .filter((ser: TimeSeries) => ser !== currentRange)
+    .map((ser) => ({
+      key: ser,
+      text: ser,
+      onClick: () => onChange(ser as TimeSeries),
     }));
 };

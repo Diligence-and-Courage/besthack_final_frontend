@@ -1,12 +1,3 @@
-// export type NewsRequest = {
-//   domains: string;
-//   from: string;
-//   to: string;
-//   language: 'ru';
-//   page: number;
-//   pageSize: number;
-// };
-
 export type NewsArticle = {
   source: {
     id: string;
@@ -24,3 +15,38 @@ export type NewsArticle = {
     name: string;
   }[];
 };
+
+export type NewsRequest = {
+  domains: string;
+  from: string;
+  to: string;
+  language: 'ru';
+  page: number;
+  pageSize: number;
+};
+
+export type NewsResponse = {
+  totalResults: number;
+  status: 'ok' | 'error';
+
+  // when status error
+  code?: string;
+  message?: string;
+
+  // when status ok
+  articles?: NewsArticle[];
+};
+
+export type UpdateDomainsEnabledRequest = {
+  domain: string;
+  enabled: boolean;
+};
+
+export const availableDomains = ['news.google.com', 'lenta.ru', 'www.rbc.ru', 'russian.rt.com'];
+export type Domain = 'news.google.com' | 'lenta.ru' | 'www.rbc.ru' | 'russian.rt.com';
+export type GetNewsRequest = {
+  page?: number;
+  pageSize?: number;
+};
+
+export type NewsDomains = { domain: Domain; isEnabled: boolean };

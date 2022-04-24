@@ -2,23 +2,19 @@ import { CommandBar as FluentCommandBar, ICommandBarItemProps } from '@fluentui/
 import React, { FC } from 'react';
 
 import { ChartType } from '../../../components/Chart';
-import { rangeConfig, RangeType } from '../Range';
+import { TimeSeries } from '../../../models';
 import { getChartItems, getIconName, getName, getRangeItems } from './utils';
 
 interface CommandBarProps {
   currentChart: ChartType;
-  currentRange: RangeType;
-  currVolume: boolean;
-  onRangeChange: (newRange: RangeType) => void;
+  currentRange: TimeSeries;
+  onRangeChange: (newRange: TimeSeries) => void;
   onTypeChange: (newType: ChartType) => void;
-  onVolumeChange: () => void;
 }
 
 export const CommandBar: FC<CommandBarProps> = ({
   currentChart,
   onTypeChange,
-  currVolume,
-  onVolumeChange,
   currentRange,
   onRangeChange,
 }) => {
@@ -58,17 +54,11 @@ export const CommandBar: FC<CommandBarProps> = ({
     },
     {
       key: 'range',
-      text: rangeConfig[currentRange].text,
+      text: currentRange,
       iconProps: { iconName: 'TimePicker' },
       subMenuProps: {
         items: getRangeItems(currentRange, onRangeChange),
       },
-    },
-    {
-      key: 'withVolume',
-      text: currVolume ? 'Hide volume' : 'Show volume',
-      iconProps: { iconName: currVolume ? 'BarChartVerticalFill' : 'BarChartVertical' },
-      onClick: onVolumeChange,
     },
   ];
 

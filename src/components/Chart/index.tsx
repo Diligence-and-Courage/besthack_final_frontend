@@ -1,33 +1,54 @@
 import { CommunicationColors, NeutralColors } from '@fluentui/theme/lib/colors/FluentColors';
+import { getUnixTime } from 'date-fns';
 import { createChart, CrosshairMode, UTCTimestamp } from 'lightweight-charts';
 import React, { FC, useEffect, useRef } from 'react';
 
 import { COLORS } from '../../constants/styles';
-import { StockCandle } from '../../models/Chart';
+import { TimeSeriesValues } from '../../models';
 
 export type ChartType = 'candle' | 'bar' | 'line' | 'area';
 
 interface ChartProps {
-  data: StockCandle[];
+  data: TimeSeriesValues[];
   type: ChartType;
-  withVolume?: boolean;
   isMinimal?: boolean;
 }
 
-interface LightweightStockCandle extends StockCandle {
+interface LightweightStockCandle extends Omit<TimeSeriesValues, 'time'> {
   time: UTCTimestamp;
 }
 
-const prepareData = (type: ChartType | 'volume', data: StockCandle[]): LightweightStockCandle[] => {
+const comparator = function (a: { time: number }, b: { time: number }) {
+  if (a.time > b.time) {
+    return 1;
+  }
+  if (a.time < b.time) {
+    return -1;
+  }
+  // a должно быть равным b
+  return 0;
+};
+
+const prepareData = (
+  type: ChartType | 'volume',
+  data: TimeSeriesValues[],
+): LightweightStockCandle[] => {
   if (type === 'line' || type === 'area') {
-    return data.map((candle) => ({
-      ...candle,
-      time: candle.time as UTCTimestamp,
-      value: candle.close,
-    }));
+    return data
+      .map((candle) => ({
+        ...candle,
+        time: getUnixTime(new Date(candle.time)) as UTCTimestamp,
+        value: candle.close,
+      }))
+      .sort(comparator);
   }
 
-  return data.map((candle) => ({ ...candle, time: candle.time as UTCTimestamp }));
+  return data
+    .map((candle) => ({
+      ...candle,
+      time: getUnixTime(new Date(candle.time)) as UTCTimestamp,
+    }))
+    .sort(comparator);
 };
 
 const barColors = {
@@ -39,12 +60,7 @@ const barColors = {
   wickUpColor: '#838ca1',
 };
 
-export const ChartComponent: FC<ChartProps> = ({
-  data,
-  type,
-  withVolume = false,
-  isMinimal = false,
-}) => {
+export const ChartComponent: FC<ChartProps> = ({ data, type, isMinimal = false }) => {
   const chartContainerRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -74,9 +90,6 @@ export const ChartComponent: FC<ChartProps> = ({
         },
         timeScale: {
           visible: !isMinimal,
-        },
-        localization: {
-          priceFormatter: (price) => `${price.toFixed(2)} $`,
         },
       });
       chart.timeScale().fitContent();
@@ -115,23 +128,6 @@ export const ChartComponent: FC<ChartProps> = ({
 
       series.setData(prepareData(type, data));
 
-      if (withVolume) {
-        const volumeSeries = chart.addHistogramSeries({
-          color: CommunicationColors.primary,
-          priceFormat: {
-            type: 'volume',
-          },
-          priceLineVisible: false,
-          priceScaleId: '',
-          scaleMargins: {
-            top: 0.8,
-            bottom: 0,
-          },
-        });
-
-        volumeSeries.setData(prepareData('volume', data));
-      }
-
       window.addEventListener('resize', handleResize);
 
       return () => {
@@ -140,7 +136,7 @@ export const ChartComponent: FC<ChartProps> = ({
         chart.remove();
       };
     }
-  }, [data, type, withVolume]);
+  }, [data, type]);
 
   return <div style={{ width: '100%', height: '100%' }} ref={chartContainerRef} />;
 };

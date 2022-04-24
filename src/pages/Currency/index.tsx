@@ -24,7 +24,7 @@ export const CurrencyPage = () => {
   const { data, isSuccess } = useGetCurrencyListByCodeQuery({ code: base });
   const currencyPair: CurrencyPair = useMemo(() => {
     if (isSuccess && data) {
-      const arr = camelize(data.data);
+      const arr = camelize(data.data) as CurrencyPair[];
       return arr.find(
         ({ baseCode }: CurrencyPair) => baseCode.currencyCode === current,
       ) as typeof data.data[0];
@@ -35,13 +35,13 @@ export const CurrencyPage = () => {
   const user = useGetUserInfoQuery();
   const buttons = useMemo(() => {
     const mainButton = {
-      text: HEADER_BUTTONS.goNewsList,
+      text: HEADER_BUTTONS.newsList,
       link: ROUTES.news,
     };
     if (user.isError) {
       return [
         {
-          text: HEADER_BUTTONS.goLogin,
+          text: HEADER_BUTTONS.login,
           link: ROUTES.login,
         },
         mainButton,
@@ -50,7 +50,7 @@ export const CurrencyPage = () => {
     if (user.isSuccess) {
       return [
         {
-          text: HEADER_BUTTONS.goProfile,
+          text: HEADER_BUTTONS.profile,
           link: ROUTES.profile,
         },
         mainButton,

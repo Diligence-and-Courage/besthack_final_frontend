@@ -33,11 +33,10 @@ export const NameText = styled.p`
 `;
 
 export const HEADER_BUTTONS = {
-  goLogin: 'Login',
-  goProfile: 'Profile',
-  // goMain: 'All available stocks',
-  goNewsList: 'NewsList',
-  goCurrencyList: 'CurrencyList',
+  login: 'Login',
+  profile: 'Profile',
+  newsList: 'News List',
+  currencyList: 'Currency List',
 };
 
 export const HEADERS = {

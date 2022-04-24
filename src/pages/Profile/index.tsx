@@ -13,7 +13,7 @@ import { UserInfo } from './containers/UserInfo';
 
 const buttons = [
   {
-    text: HEADER_BUTTONS.goNewsList,
+    text: HEADER_BUTTONS.newsList,
     link: ROUTES.news,
   },
 ];

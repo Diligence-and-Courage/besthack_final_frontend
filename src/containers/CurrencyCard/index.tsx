@@ -8,11 +8,10 @@ import { COLORS, GAP } from '../../constants/styles';
 import { CardHeader, NameText } from '../../constants/texts';
 import { CurrencyPair } from '../../models';
 import { StyledAlignBottomRowSpaceBetween, StyledRowSpaceBetween } from '../../styled';
-import { SingleStock } from '../singleStock';
 
 export const CurrencyCard = ({ baseCode, code, cost, percentChange }: CurrencyPair) => {
   return (
-    <Link to={`${ROUTES.currency}/${baseCode.currencyCode}-${code.currencyCode}`}>
+    <Link to={`/${ROUTES.currency.split('/')[1]}/${baseCode.currencyCode}-${code.currencyCode}`}>
       <StyledRowSpaceBetween>
         <CardHeader>{baseCode.currencyCode}</CardHeader>
         <Persona imageInitials={baseCode.symbol} initialsColor={COLORS.DEFAULT} />
@@ -23,7 +22,6 @@ export const CurrencyCard = ({ baseCode, code, cost, percentChange }: CurrencyPa
           {baseCode.name}, {baseCode.countryName}
         </NameText>
       </StyledAlignBottomRowSpaceBetween>
-      <SingleStock />
     </Link>
   );
 };

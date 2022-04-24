@@ -5,6 +5,7 @@ import { CardUI } from '../../../../components/CardUI';
 import { NumberInfo } from '../../../../components/NumberInfo';
 import { COLORS, GAP } from '../../../../constants/styles';
 import { CardHeader } from '../../../../constants/texts';
+import { SingleStock } from '../../../../containers/singleStock';
 import { CurrencyPair } from '../../../../models';
 import { StyledAlignCenterRow } from '../../../../styled';
 import { Col } from '../../styled';
@@ -24,7 +25,7 @@ export const Content = ({ code, baseCode, cost, percentChange }: CurrencyPair) =
             <Persona imageInitials={baseCode.symbol} initialsColor={COLORS.DEFAULT} />
             <NumberInfo cost={cost} symbol={baseCode.symbol} percentChange={percentChange} />
           </NextLogoCol>
-          {/* <SingleStock /> */}
+          <SingleStock />
         </Col>
       </CardUI>
     </LeftCol>

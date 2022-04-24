@@ -26,7 +26,7 @@ export const NewsListPage = () => {
     if (user.isError) {
       return [
         {
-          text: HEADER_BUTTONS.goLogin,
+          text: HEADER_BUTTONS.login,
           link: ROUTES.login,
         },
       ];
@@ -34,8 +34,12 @@ export const NewsListPage = () => {
     if (user.isSuccess) {
       return [
         {
-          text: HEADER_BUTTONS.goProfile,
+          text: HEADER_BUTTONS.profile,
           link: ROUTES.profile,
+        },
+        {
+          text: HEADER_BUTTONS.currencyList,
+          link: ROUTES.overview,
         },
       ];
     }
@@ -46,7 +50,7 @@ export const NewsListPage = () => {
     <Layout
       header={<Header pageName={HEADERS.newsList} buttons={buttons} />}
       left={
-        isSuccess ? (
+        isSuccess && (
           <CardsWrapper>
             {stocks.map((stock, idx) => (
               <CardWrapper key={idx}>
@@ -56,7 +60,7 @@ export const NewsListPage = () => {
               </CardWrapper>
             ))}
           </CardsWrapper>
-        ) : null
+        )
       }
     />
   );
