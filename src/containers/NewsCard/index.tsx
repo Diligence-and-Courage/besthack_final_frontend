@@ -21,29 +21,29 @@ export const NewsCard = ({
   const day = date.toLocaleDateString('ru-RU');
   const time = date.toLocaleTimeString('ru-RU').slice(0, 5);
   return (
-    <NewsCardWrapper>
-      <SmallCardHeader>{title}</SmallCardHeader>
-      <StyledRowSpaceBetween>
-        <PlainGreyText>{`${day} ${time}`}</PlainGreyText>
-        <StyledRowSpaceBetween gap={GAP.m}>
-          {categories.map(({ name }, idx) => (
-            <LabelText key={idx}>{name}</LabelText>
-          ))}
+    <Link target="_blank" href={url} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+      <NewsCardWrapper>
+        <SmallCardHeader>{title}</SmallCardHeader>
+        <StyledRowSpaceBetween>
+          <PlainGreyText>{`${day} ${time}`}</PlainGreyText>
+          <StyledRowSpaceBetween gap={GAP.m}>
+            {categories.map(({ name }, idx) => (
+              <LabelText key={idx}>{name}</LabelText>
+            ))}
+          </StyledRowSpaceBetween>
         </StyledRowSpaceBetween>
-      </StyledRowSpaceBetween>
-      <PlainText>{description}</PlainText>
-      <Image
-        // imageFit={ImageFit.centerCover}
-        src={urlToImage}
-        alt={`photo for new: ${title}`}
-        // width="100%"
-      />
-      <StyledRowSpaceBetween>
-        <Link href={url}>
+        <PlainText>{description}</PlainText>
+        <Image
+          // imageFit={ImageFit.centerCover}
+          src={urlToImage}
+          alt={`photo for new: ${title}`}
+          // width="100%"
+        />
+        <StyledRowSpaceBetween>
           <PlainText>{source.name}</PlainText>
-        </Link>
-        <PlainGreyText>Автор: {author}</PlainGreyText>
-      </StyledRowSpaceBetween>
-    </NewsCardWrapper>
+          <PlainGreyText>Автор: {author}</PlainGreyText>
+        </StyledRowSpaceBetween>
+      </NewsCardWrapper>
+    </Link>
   );
 };
