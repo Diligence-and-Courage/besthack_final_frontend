@@ -1,4 +1,4 @@
-import { AppResponse, AuthUserInfo, CreateUserInfo, UserInfo } from '../../models';
+import { AppResponse, AuthUserInfo, CreateUserInfo, Currency, UserInfo } from '../../models';
 import { baseApi } from '../index';
 
 const userApi = baseApi.injectEndpoints({
@@ -20,8 +20,16 @@ const userApi = baseApi.injectEndpoints({
         body: info,
       }),
     }),
+    getUserCurrency: builder.query<AppResponse<Currency[]>, void>({
+      query: () => '/user/currency',
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetUserInfoQuery, useLoginMutation, useRegisterMutation } = userApi;
+export const {
+  useGetUserInfoQuery,
+  useLoginMutation,
+  useRegisterMutation,
+  useGetUserCurrencyQuery,
+} = userApi;

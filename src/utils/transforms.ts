@@ -1,6 +1,6 @@
 import { camelCase, mapKeys, snakeCase } from 'lodash';
 
-export const decamelize = (input: Record<string, any>) => {
+export const decamelize = (input: Record<string, never>) => {
   if (Array.isArray(input)) {
     return input.map((obj) => mapKeys(obj, (v, k) => snakeCase(k)));
   }
@@ -8,7 +8,7 @@ export const decamelize = (input: Record<string, any>) => {
   return mapKeys(input, (v, k) => snakeCase(k));
 };
 
-export const camelize = (input: Record<string, any>) => {
+export const camelize = (input: Record<string, never>) => {
   if (Array.isArray(input)) {
     return input.map((obj) => mapKeys(obj, (v, k) => camelCase(k)));
   }
