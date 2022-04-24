@@ -10,7 +10,7 @@ import { Header } from '../../components/Header';
 import { Layout } from '../../components/Layout';
 import { HEADER_BUTTONS, HEADERS } from '../../constants/texts';
 import { CurrencyCard } from '../../containers/CurrencyCard';
-import { CurrencyPair } from '../../models';
+import { Currency, CurrencyPair } from '../../models';
 import { camelize } from '../../utils/transforms';
 import { CardsWrapper, CardWrapper, PageWrapper } from './styled';
 
@@ -18,15 +18,13 @@ export const CurrencyListPage = () => {
   const { code } = useParams();
 
   const optionsResponse = useGetAllCurrencyQuery();
-  const options = useMemo(() => {
-    if (optionsResponse.isSuccess && optionsResponse.data) {
-      return optionsResponse.data.data.map(({ currencyCode }) => ({
-        key: currencyCode,
-        text: currencyCode,
-      }));
-    }
-    return [];
-  }, [optionsResponse]);
+  const options =
+    optionsResponse.isSuccess && optionsResponse.data
+      ? camelize(optionsResponse.data.data).map(({ currencyCode }: Currency) => ({
+          key: currencyCode,
+          text: currencyCode,
+        }))
+      : [];
 
   const { data, isSuccess } = useGetCurrencyListByCodeQuery({ code });
   const currencies: CurrencyPair[] = useMemo(() => {
@@ -38,7 +36,7 @@ export const CurrencyListPage = () => {
 
   const navigate = useNavigate();
   const changeBase = (event: React.FormEvent<HTMLDivElement>, item: IDropdownOption): void => {
-    navigate(`${ROUTES.currency + ROUTES.overview}/${item.key}`);
+    navigate(`${ROUTES.overview}/${item.key}`);
   };
 
   const user = useGetUserInfoQuery();
