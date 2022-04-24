@@ -1,4 +1,4 @@
-import { Label, TextField } from '@fluentui/react';
+import { TextField } from '@fluentui/react';
 import React from 'react';
 import { Field } from 'react-final-form';
 
@@ -33,14 +33,14 @@ export const FormField =
 
 type SignupField = 'name' | 'surname' | 'email' | 'password' | 'confirm';
 
-export const SignupFormRow = (id: SignupField, label: string, type?: string) => (
+export const SignupFormRow = (id: SignupField, label: string, type?: string, initialValue = '') => (
   <Row>
-    <Label htmlFor={id}>{label}</Label>
     <Field
       name={id}
       id={id}
+      initialValue={initialValue}
       validate={(value, values, meta) => validation.validateField(meta.name, value, values)}
-      component={FormField(id, type)}
+      component={FormField(id, type, label)}
     />
   </Row>
 );

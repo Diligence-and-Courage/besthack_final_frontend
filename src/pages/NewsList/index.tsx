@@ -29,6 +29,10 @@ export const NewsListPage = () => {
           text: HEADER_BUTTONS.login,
           link: ROUTES.login,
         },
+        {
+          text: HEADER_BUTTONS.currencyList,
+          link: ROUTES.overview,
+        },
       ];
     }
     if (user.isSuccess) {

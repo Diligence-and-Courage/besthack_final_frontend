@@ -6,13 +6,15 @@ import { CurrencyListPage } from '../pages/CurrencyList';
 import { LoginPage } from '../pages/Login';
 import { NewsListPage } from '../pages/NewsList';
 import { ProfilePage } from '../pages/Profile';
+import { SignupPage } from '../pages/Signup';
 import { ROUTES } from './routes';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path={ROUTES.auth} element={<LoginPage />} />
+        <Route path={ROUTES.signup} element={<SignupPage />} />
+        <Route path={ROUTES.login} element={<LoginPage />} />
         <Route path={ROUTES.currency} element={<CurrencyPage />} />
         <Route
           path={ROUTES.currency}

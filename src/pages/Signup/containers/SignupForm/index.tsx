@@ -4,7 +4,7 @@ import { Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetUserExistsQuery, useLoginMutation } from '../../../../api/user';
+import { useGetUserExistsQuery, useRegisterMutation } from '../../../../api/user';
 import { ROUTES } from '../../../../App/routes';
 import { SignupFormRow } from '../../../../containers/FormFields';
 import { BtnRightRow } from '../../../../containers/FormFields/styled';
@@ -29,11 +29,12 @@ const onSubmit =
   };
 
 const passwordField = SignupFormRow('password', 'Password', 'password');
+const confirmField = SignupFormRow('confirm', 'Repeat password', 'password');
 
-export const LoginForm = () => {
+export const SignupForm = () => {
   const [email, setEmail] = useState<string>('');
 
-  const [login, { isSuccess }] = useLoginMutation();
+  const [register, { isSuccess }] = useRegisterMutation();
   const { data } = useGetUserExistsQuery({ login: email });
   const navigate = useNavigate();
 
@@ -43,11 +44,12 @@ export const LoginForm = () => {
     }
   }, [isSuccess]);
 
-  if (email && data?.data?.exists === false) {
-    navigate(`${ROUTES.signup}?email=${email}`);
+  if (data?.data?.exists) {
+    navigate(`${ROUTES.login}?email=${email}`);
   }
 
   const query = useQuery();
+
   const emailField = useMemo(
     () => SignupFormRow('email', 'E-mail', undefined, query.get('email')),
     [],
@@ -55,11 +57,12 @@ export const LoginForm = () => {
 
   return (
     <Form
-      onSubmit={onSubmit(login)}
+      onSubmit={onSubmit(register)}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           {emailField}
           {passwordField}
+          {confirmField}
           <OnChange name="email">{(value) => setEmail(value)}</OnChange>
           <BtnRightRow>
             <DefaultButton type="submit">Go</DefaultButton>

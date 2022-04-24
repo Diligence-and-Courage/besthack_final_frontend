@@ -62,12 +62,17 @@ export const HEADERS = {
   ),
   auth: (
     <Header>
-      <Blue>Enter</Blue>
+      <Blue>Log in</Blue>
     </Header>
   ),
   profile: (
     <Header>
-      <Blue>site</Blue> Profile
+      <Blue>Profile</Blue>
+    </Header>
+  ),
+  signup: (
+    <Header>
+      <Blue>Singup</Blue>
     </Header>
   ),
 };

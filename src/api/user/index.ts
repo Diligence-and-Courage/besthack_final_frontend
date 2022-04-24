@@ -13,6 +13,12 @@ const userApi = baseApi.injectEndpoints({
         body: args,
       }),
     }),
+    getUserExists: builder.query<AppResponse<{ exists: boolean }>, { login: string }>({
+      query: (args) => ({
+        url: `/user/exists?login=${args.login}`,
+        method: 'GET',
+      }),
+    }),
     login: builder.mutation<AppResponse<UserInfo>, AuthUserInfo>({
       query: (info) => ({
         url: '/user/login',
@@ -32,4 +38,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGetUserCurrencyQuery,
+  useGetUserExistsQuery,
 } = userApi;
